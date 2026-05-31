@@ -175,8 +175,6 @@
   }
 
   .hidden { display: none !important; }
-  .settings-btn { background: transparent; border: 1px solid var(--border); color: var(--text-faint); width: 40px; height: 40px; border-radius: 50%; font-size: 18px; display: inline-flex; align-items: center; justify-content: center; }
-  .settings-btn:hover { color: var(--text); border-color: var(--border-strong); }
 </style>
 </head>
 <body>
@@ -193,7 +191,6 @@
         <label for="source-select">Level</label>
         <select id="source-select" class="source-select"><option value="">All levels</option></select>
       </div>
-      <button class="settings-btn" id="settings-btn" title="Settings">⚙</button>
     </div>
   </header>
 
@@ -220,10 +217,14 @@
         <div class="bank-sub">Needs review</div>
       </button>
     </div>
-    <div class="actions">
-      <button class="btn btn-primary" id="start-btn">Start 20-Question Quiz</button>
-      <button class="btn btn-ghost"   id="refresh-btn">Refresh tallies</button>
-      <button class="btn btn-danger"  id="reset-btn" style="margin-left:auto;">Reset to Untested</button>
+    <div style="margin-top:24px; display:flex; flex-direction:column; gap:12px;">
+      <div>
+        <button class="btn btn-primary" id="start-btn" style="width:100%;">Start 20-Question Quiz</button>
+      </div>
+      <div style="display:flex; gap:12px;">
+        <button class="btn btn-ghost"  id="refresh-btn" style="flex:1;">Refresh tallies</button>
+        <button class="btn btn-danger" id="reset-btn"   style="flex:1;">Reset to Untested</button>
+      </div>
     </div>
     <div class="status-line" id="home-status"></div>
   </section>
@@ -291,19 +292,7 @@
   </div>
 </div>
 
-<!-- Settings modal -->
-<div class="modal-backdrop hidden" id="settings-modal">
-  <div class="modal">
-    <h3>Settings</h3>
-    <p>Update or disconnect your Apps Script URL.</p>
-    <input id="settings-url-input" style="width:100%;padding:13px 15px;background:var(--bg-elev);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:15px;font-family:'JetBrains Mono',monospace;margin-bottom:18px;" />
-    <div class="actions">
-      <button class="btn btn-ghost"   id="settings-cancel">Cancel</button>
-      <button class="btn btn-danger"  id="settings-clear">Disconnect</button>
-      <button class="btn btn-primary" id="settings-save">Save</button>
-    </div>
-  </div>
-</div>
+
 
 <script>
 const STORAGE_KEY = 'bfq.apiUrl.v2';
@@ -614,19 +603,7 @@ function quitQuiz() {
   showScreen('home');
 }
 
-function showSettings() { $('settings-url-input').value = state.apiUrl || ''; $('settings-modal').classList.remove('hidden'); }
-function saveSettings() {
-  const url = $('settings-url-input').value.trim();
-  if (!url) { alert('URL is empty.'); return; }
-  state.apiUrl = url; localStorage.setItem(STORAGE_KEY, url);
-  $('settings-modal').classList.add('hidden'); init();
-}
-function clearSettings() {
-  if (!confirm('Disconnect from Google Sheet?')) return;
-  state.apiUrl = ''; localStorage.removeItem(STORAGE_KEY);
-  $('settings-modal').classList.add('hidden'); showScreen('config');
-}
-function saveConfig() {
+function saveConfig() { {
   const url = $('api-url-input').value.trim();
   if (!url) { alert('Please paste your Apps Script /exec URL.'); return; }
   state.apiUrl = url; localStorage.setItem(STORAGE_KEY, url); init();
@@ -652,10 +629,6 @@ $('reset-confirm').addEventListener('click', doReset);
 $('submit-btn').addEventListener('click', onSubmit);
 $('quit-btn').addEventListener('click',   quitQuiz);
 $('done-btn').addEventListener('click',   commitAndReturnHome);
-$('settings-btn').addEventListener('click',    showSettings);
-$('settings-cancel').addEventListener('click', () => $('settings-modal').classList.add('hidden'));
-$('settings-save').addEventListener('click',   saveSettings);
-$('settings-clear').addEventListener('click',  clearSettings);
 $('save-config-btn').addEventListener('click', saveConfig);
 
 init();
