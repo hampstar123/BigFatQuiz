@@ -641,11 +641,11 @@ function saveSettings() {
   init();
 }
 function clearSettings() {
-  if (!confirm('Disconnect from Google Sheet?')) return;
-  state.apiUrl = '';
+  if (!confirm('Reset to default URL?')) return;
+  state.apiUrl = API_URL_DEFAULT;
   localStorage.removeItem(STORAGE_KEY);
   $('settings-modal').classList.add('hidden');
-  showScreen('config');
+  init();
 }
 function saveConfig() {
   const url = $('api-url-input').value.trim();
@@ -656,7 +656,10 @@ function saveConfig() {
 }
 
 async function init() {
-  if (!apiConfigured()) { showScreen('config'); return; }
+  // Always use baked-in URL as fallback — never show config screen
+  if (!state.apiUrl || !state.apiUrl.startsWith('http')) {
+    state.apiUrl = API_URL_DEFAULT;
+  }
   showScreen('home');
   await loadSources();
   await refreshTallies();
