@@ -314,13 +314,15 @@ function apiConfigured() {
   return state.apiUrl && !state.apiUrl.startsWith('PASTE_') && state.apiUrl.startsWith('http');
 }
 
-async function api(action, params = {}, isPost = false) {
-  if (!apiConfigured()) throw new Error('Apps Script URL not configured. Open settings (⚙) to set it.');
-  const url = isPost ? state.apiUrl : `${state.apiUrl}?${new URLSearchParams({ action, ...params })}`;
-  const opts = isPost
-    ? { method: 'POST', body: JSON.stringify({ action, ...params }), headers: { 'Content-Type': 'text/plain;charset=utf-8' } }
-    : { method: 'GET' };
-  const res  = await fetch(url, opts);
+async function api(action, params = {}) {
+  if (!apiConfigured()) throw new Error('Apps Script URL not configured.');
+  // Always POST — avoids Google Apps Script query-string stripping on redirect
+  const opts = {
+    method: 'POST',
+    body: JSON.stringify({ action, ...params }),
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+  };
+  const res  = await fetch(state.apiUrl, opts);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = await res.json();
   if (!data.ok) throw new Error(data.error || 'Unknown API error');
@@ -526,7 +528,7 @@ async function commitAndReturnHome() {
       id: r.id, source: r.source || state.selectedSource,
       status: r.isCorrect ? 'correct' : 'incorrect'
     }));
-    await api('update', { source: state.selectedSource, updates }, true);
+    await api('update', { source: state.selectedSource, updates });
     state.quiz = null;
     await refreshTallies();
     showScreen('home');
@@ -544,7 +546,7 @@ async function doReset() {
   $('reset-confirm').textContent = 'Resetting…';
   try {
     const params = state.selectedSource ? { source: state.selectedSource } : {};
-    await api('reset', params, true);
+    await api('reset', params);
     $('reset-modal').classList.add('hidden');
     await refreshTallies();
     setStatus((state.selectedSource || 'All levels') + ' reset to Untested.', 'success');
