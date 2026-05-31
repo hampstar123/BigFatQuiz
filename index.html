@@ -31,12 +31,15 @@
     --shadow-card:  0 2px 8px rgba(0,0,0,.25);
     --shadow-deep:  0 10px 40px rgba(0,0,0,.45);
   }
+
   * { box-sizing: border-box; }
   html, body {
     margin: 0; padding: 0; height: 100%;
-    background: var(--bg); color: var(--text);
+    background: var(--bg);
+    color: var(--text);
     font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-    font-weight: 400; line-height: 1.6; font-size: 17px;
+    font-weight: 400; line-height: 1.6;
+    font-size: 17px;
     -webkit-font-smoothing: antialiased;
   }
   body {
@@ -47,6 +50,7 @@
   }
   button { font-family: inherit; cursor: pointer; }
   select, input { font-family: inherit; }
+
   .app { max-width: 920px; margin: 0 auto; padding: 32px 24px 80px; }
 
   header.top {
@@ -91,8 +95,8 @@
   .btn-danger:hover { background: var(--coral-bg); color: var(--coral); }
 
   .status-line { margin: 18px 4px 0; min-height: 22px; font-size: 16px; color: var(--text-faint); }
-  .status-line.error   { color: var(--coral); }
-  .status-line.success { color: var(--mint);  }
+  .status-line.error { color: var(--coral); }
+  .status-line.success { color: var(--mint); }
 
   .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
   .quiz-pos { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--text-dim); letter-spacing: 0.05em; }
@@ -136,12 +140,12 @@
   .review-item .qbody .qtxt { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 19px; color: var(--text); line-height: 1.45; margin-bottom: 12px; }
   .review-line { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
   .review-line .glyph { width: 20px; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.05em; padding-top: 3px; }
-  .review-line.your-correct   { color: var(--mint);  }
+  .review-line.your-correct   { color: var(--mint); }
   .review-line.your-incorrect { color: var(--coral); }
-  .review-line.correct-ans    { color: var(--mint);  }
+  .review-line.correct-ans    { color: var(--mint); }
   .review-item .review-expl { margin-top: 12px; font-size: 15px; color: var(--text-faint); padding-left: 28px; border-left: 2px solid var(--border); line-height: 1.55; }
   .review-mark { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; margin-right: 10px; flex-shrink: 0; }
-  .review-mark.right { background: var(--mint);  color: #0E141B; }
+  .review-mark.right { background: var(--mint); color: #0E141B; }
   .review-mark.wrong { background: var(--coral); color: #0E141B; }
   .done-bar { position: sticky; bottom: 16px; z-index: 5; display: flex; justify-content: center; margin-top: 28px; }
   .done-bar .btn-primary { padding: 18px 40px; font-size: 18px; }
@@ -149,12 +153,12 @@
   .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 50; padding: 20px; }
   .modal { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 26px; max-width: 440px; width: 100%; box-shadow: var(--shadow-deep); }
   .modal h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 25px; margin: 0 0 14px; color: var(--text); }
-  .modal p  { color: var(--text-dim); font-size: 17px; margin: 0 0 24px; line-height: 1.55; }
+  .modal p { color: var(--text-dim); font-size: 17px; margin: 0 0 24px; line-height: 1.55; }
   .modal .actions { justify-content: flex-end; margin: 0; }
 
   .config-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 26px; max-width: 560px; margin: 40px auto; }
   .config-card h2 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 26px; margin: 0 0 10px; }
-  .config-card p  { color: var(--text-dim); font-size: 16px; margin: 0 0 18px; line-height: 1.55; }
+  .config-card p { color: var(--text-dim); font-size: 16px; margin: 0 0 18px; line-height: 1.55; }
   .config-card input { width: 100%; padding: 13px 15px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 15px; font-family: 'JetBrains Mono', monospace; margin-bottom: 16px; }
   .config-card input:focus { outline: 2px solid var(--mint-dim); }
   .small { font-size: 14px; color: var(--text-faint); }
@@ -175,6 +179,8 @@
   }
 
   .hidden { display: none !important; }
+  .settings-btn { background: transparent; border: 1px solid var(--border); color: var(--text-faint); width: 40px; height: 40px; border-radius: 50%; font-size: 18px; display: inline-flex; align-items: center; justify-content: center; }
+  .settings-btn:hover { color: var(--text); border-color: var(--border-strong); }
 </style>
 </head>
 <body>
@@ -191,6 +197,7 @@
         <label for="source-select">Level</label>
         <select id="source-select" class="source-select"><option value="">All levels</option></select>
       </div>
+      <button class="settings-btn" id="settings-btn" title="Settings">⚙</button>
     </div>
   </header>
 
@@ -217,14 +224,10 @@
         <div class="bank-sub">Needs review</div>
       </button>
     </div>
-    <div style="margin-top:24px; display:flex; flex-direction:column; gap:12px;">
-      <div>
-        <button class="btn btn-primary" id="start-btn" style="width:100%;">Start 20-Question Quiz</button>
-      </div>
-      <div style="display:flex; gap:12px;">
-        <button class="btn btn-ghost"  id="refresh-btn" style="flex:1;">Refresh tallies</button>
-        <button class="btn btn-danger" id="reset-btn"   style="flex:1;">Reset to Untested</button>
-      </div>
+    <div class="actions">
+      <button class="btn btn-primary" id="start-btn">Start 20-Question Quiz</button>
+      <button class="btn btn-ghost" id="refresh-btn">Refresh tallies</button>
+      <button class="btn btn-danger" id="reset-btn" style="margin-left:auto;">Reset all to Untested</button>
     </div>
     <div class="status-line" id="home-status"></div>
   </section>
@@ -243,7 +246,7 @@
       <div id="quiz-explanation" class="explanation hidden"></div>
     </div>
     <div class="quiz-footer">
-      <button class="btn btn-ghost"   id="quit-btn">Quit (discard progress)</button>
+      <button class="btn btn-ghost" id="quit-btn">Quit (discard progress)</button>
       <button class="btn btn-primary" id="submit-btn" disabled>Submit Answer</button>
     </div>
   </section>
@@ -284,18 +287,30 @@
 <div class="modal-backdrop hidden" id="reset-modal">
   <div class="modal">
     <h3>Reset this level?</h3>
-    <p>This moves every question in <b id="reset-modal-source">the selected level</b> back to the <b>Untested</b> bank. Cannot be undone.</p>
+    <p>This moves every question in <b id="reset-modal-source">the selected level</b> back to <b>Untested</b>. Cannot be undone.</p>
     <div class="actions">
-      <button class="btn btn-ghost"  id="reset-cancel">Cancel</button>
+      <button class="btn btn-ghost" id="reset-cancel">Cancel</button>
       <button class="btn btn-danger" id="reset-confirm">Reset</button>
     </div>
   </div>
 </div>
 
-
+<!-- Settings modal -->
+<div class="modal-backdrop hidden" id="settings-modal">
+  <div class="modal">
+    <h3>Settings</h3>
+    <p>Apps Script URL is stored locally in your browser.</p>
+    <input id="settings-url-input" style="width:100%; padding:13px 15px; background:var(--bg-elev); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:15px; font-family:'JetBrains Mono', monospace; margin-bottom:18px;" />
+    <div class="actions">
+      <button class="btn btn-ghost" id="settings-cancel">Cancel</button>
+      <button class="btn btn-danger" id="settings-clear">Disconnect</button>
+      <button class="btn btn-primary" id="settings-save">Save</button>
+    </div>
+  </div>
+</div>
 
 <script>
-const STORAGE_KEY = 'bfq.apiUrl.v2';
+const STORAGE_KEY = 'bfq.apiUrl.v1';
 const QUIZ_SIZE   = 20;
 const API_URL_DEFAULT = 'https://script.google.com/macros/s/AKfycbxJU1O9ZCqzsdS3v3l4Qvf_EtVd0WxY5CITOOPyTuoCikQvzYSl75aNpQrJSYpXa38/exec';
 
@@ -314,15 +329,14 @@ function apiConfigured() {
   return state.apiUrl && !state.apiUrl.startsWith('PASTE_') && state.apiUrl.startsWith('http');
 }
 
+// Always POST — avoids Google Apps Script query-string stripping on redirect
 async function api(action, params = {}) {
-  if (!apiConfigured()) throw new Error('Apps Script URL not configured.');
-  // Always POST — avoids Google Apps Script query-string stripping on redirect
-  const opts = {
+  if (!apiConfigured()) throw new Error('Apps Script URL not configured. Open ⚙ to set it.');
+  const res = await fetch(state.apiUrl, {
     method: 'POST',
     body: JSON.stringify({ action, ...params }),
     headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-  };
-  const res  = await fetch(state.apiUrl, opts);
+  });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = await res.json();
   if (!data.ok) throw new Error(data.error || 'Unknown API error');
@@ -330,7 +344,8 @@ async function api(action, params = {}) {
 }
 
 async function refreshTallies() {
-  setStatus(''); 
+  $('home-status').textContent = '';
+  $('home-status').className = 'status-line';
   try {
     const params = state.selectedSource ? { source: state.selectedSource } : {};
     const data = await api('tallies', params);
@@ -338,8 +353,14 @@ async function refreshTallies() {
     $('tally-untested').textContent  = data.tallies.untested;
     $('tally-correct').textContent   = data.tallies.correct;
     $('tally-incorrect').textContent = data.tallies.incorrect;
-    if (!data.tallies.total) setStatus('No questions found for this level.', 'error');
-  } catch (err) { setStatus('Could not load tallies: ' + err.message, 'error'); }
+    if (!data.tallies.total) {
+      $('home-status').textContent = 'No questions found for this level.';
+      $('home-status').className = 'status-line error';
+    }
+  } catch (err) {
+    $('home-status').textContent = 'Could not load tallies: ' + err.message;
+    $('home-status').className = 'status-line error';
+  }
 }
 
 async function loadSources() {
@@ -363,7 +384,10 @@ async function loadSources() {
       state.selectedSource = data.sources[0].name;
       refreshTallies();
     }
-  } catch (err) { /* non-fatal */ }
+  } catch (err) {
+    $('home-status').textContent = 'Could not load levels: ' + err.message;
+    $('home-status').className = 'status-line error';
+  }
 }
 
 function selectBank(bank) {
@@ -374,7 +398,7 @@ function selectBank(bank) {
 }
 
 async function startQuiz() {
-  setStatus('');
+  $('home-status').textContent = '';
   $('start-btn').disabled = true;
   $('start-btn').textContent = 'Loading…';
   try {
@@ -382,14 +406,17 @@ async function startQuiz() {
     if (state.selectedSource) params.source = state.selectedSource;
     const data = await api('fetch', params);
     if (!data.questions.length) {
-      setStatus(`No questions in the "${labelForBank(state.selectedBank)}" bank for this level.`, 'error');
+      $('home-status').textContent = `No questions in the "${labelForBank(state.selectedBank)}" bank for this level.`;
+      $('home-status').className = 'status-line error';
       return;
     }
     state.quiz = { bank: state.selectedBank, questions: data.questions, idx: 0, results: [] };
     showScreen('quiz');
     renderQuestion();
-  } catch (err) { setStatus('Could not start quiz: ' + err.message, 'error'); }
-  finally {
+  } catch (err) {
+    $('home-status').textContent = 'Could not start quiz: ' + err.message;
+    $('home-status').className = 'status-line error';
+  } finally {
     $('start-btn').disabled = false;
     $('start-btn').textContent = 'Start 20-Question Quiz';
   }
@@ -418,7 +445,7 @@ function renderQuestion() {
     const btn = document.createElement('button');
     btn.className = 'choice';
     btn.dataset.idx = i;
-    btn.innerHTML = `<span class="letter">${String.fromCharCode(65+i)}</span><span class="ctext"></span>`;
+    btn.innerHTML = `<span class="letter">${String.fromCharCode(65 + i)}</span><span class="ctext"></span>`;
     btn.querySelector('.ctext').textContent = text;
     btn.addEventListener('click', () => onChooseAnswer(i));
     container.appendChild(btn);
@@ -464,7 +491,7 @@ function revealAnswer() {
   }
 
   state.quiz.results.push({
-    id: q.id, source: q.source || state.selectedSource,
+    id: q.id, source: state.selectedSource,
     chosenIdx: chosen, correctIdx: correct, isCorrect: isRight,
     questionSnapshot: {
       question: q.question,
@@ -485,10 +512,9 @@ function nextQuestion() { state.quiz.idx++; renderQuestion(); }
 function showReview() {
   const results   = state.quiz.results;
   const correct   = results.filter(r => r.isCorrect).length;
-  const incorrect = results.length - correct;
   $('sum-score').textContent     = `${correct}/${results.length}`;
   $('sum-correct').textContent   = correct;
-  $('sum-incorrect').textContent = incorrect;
+  $('sum-incorrect').textContent = results.length - correct;
   $('review-bank-tag').textContent = `From ${labelForBank(state.quiz.bank)}`;
 
   const list = $('review-list');
@@ -525,7 +551,7 @@ async function commitAndReturnHome() {
   $('review-status').textContent = '';
   try {
     const updates = state.quiz.results.map(r => ({
-      id: r.id, source: r.source || state.selectedSource,
+      id: r.id, source: r.source,
       status: r.isCorrect ? 'correct' : 'incorrect'
     }));
     await api('update', { source: state.selectedSource, updates });
@@ -549,9 +575,11 @@ async function doReset() {
     await api('reset', params);
     $('reset-modal').classList.add('hidden');
     await refreshTallies();
-    setStatus((state.selectedSource || 'All levels') + ' reset to Untested.', 'success');
+    $('home-status').textContent = (state.selectedSource || 'All levels') + ' reset to Untested.';
+    $('home-status').className = 'status-line success';
   } catch (err) {
-    setStatus('Reset failed: ' + err.message, 'error');
+    $('home-status').textContent = 'Reset failed: ' + err.message;
+    $('home-status').className = 'status-line error';
     $('reset-modal').classList.add('hidden');
   } finally {
     $('reset-confirm').disabled = false;
@@ -585,11 +613,6 @@ function labelForBank(b) {
   return b === 'untested' ? 'Untested' : b === 'correct' ? 'Correctly Answered' : 'Incorrectly Answered';
 }
 
-function setStatus(msg, type) {
-  $('home-status').textContent = msg;
-  $('home-status').className   = 'status-line' + (type ? ' ' + type : '');
-}
-
 function showScreen(name) {
   ['home','quiz','review','config'].forEach(s => {
     const el = $(`${s}-screen`);
@@ -605,10 +628,31 @@ function quitQuiz() {
   showScreen('home');
 }
 
-function saveConfig() { {
+function showSettings() {
+  $('settings-url-input').value = state.apiUrl || '';
+  $('settings-modal').classList.remove('hidden');
+}
+function saveSettings() {
+  const url = $('settings-url-input').value.trim();
+  if (!url) { alert('URL is empty.'); return; }
+  state.apiUrl = url;
+  localStorage.setItem(STORAGE_KEY, url);
+  $('settings-modal').classList.add('hidden');
+  init();
+}
+function clearSettings() {
+  if (!confirm('Disconnect from Google Sheet?')) return;
+  state.apiUrl = '';
+  localStorage.removeItem(STORAGE_KEY);
+  $('settings-modal').classList.add('hidden');
+  showScreen('config');
+}
+function saveConfig() {
   const url = $('api-url-input').value.trim();
   if (!url) { alert('Please paste your Apps Script /exec URL.'); return; }
-  state.apiUrl = url; localStorage.setItem(STORAGE_KEY, url); init();
+  state.apiUrl = url;
+  localStorage.setItem(STORAGE_KEY, url);
+  init();
 }
 
 async function init() {
@@ -631,6 +675,10 @@ $('reset-confirm').addEventListener('click', doReset);
 $('submit-btn').addEventListener('click', onSubmit);
 $('quit-btn').addEventListener('click',   quitQuiz);
 $('done-btn').addEventListener('click',   commitAndReturnHome);
+$('settings-btn').addEventListener('click',    showSettings);
+$('settings-cancel').addEventListener('click', () => $('settings-modal').classList.add('hidden'));
+$('settings-save').addEventListener('click',   saveSettings);
+$('settings-clear').addEventListener('click',  clearSettings);
 $('save-config-btn').addEventListener('click', saveConfig);
 
 init();
