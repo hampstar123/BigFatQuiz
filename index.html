@@ -205,6 +205,12 @@
         <option value="">All levels</option>
       </select>
     </div>
+    <div class="source-select-wrap" id="topic-wrap">
+      <label for="topic-select">Topic</label>
+      <select id="topic-select" class="source-select">
+        <option value="">All topics</option>
+      </select>
+    </div>
   </header>
 
   <!-- HOME -->
@@ -300,6 +306,7 @@ const state = {
   apiUrl:         localStorage.getItem(STORAGE_KEY) || API_URL_DEFAULT,
   selectedBank:   'untested',
   selectedSource: '',
+  selectedTopic:  '',
   quiz:           null,
 };
 
@@ -324,6 +331,7 @@ async function refreshTallies() {
   $('home-status').className   = 'status-line';
   try {
     const params = state.selectedSource ? { source: state.selectedSource } : {};
+    if (state.selectedTopic) params.category = state.selectedTopic;
     const data   = await api('tallies', params);
     $('tally-untested').textContent  = data.tallies.untested;
     $('tally-correct').textContent   = data.tallies.correct;
@@ -364,6 +372,25 @@ async function loadSources() {
   }
 }
 
+
+async function loadTopics() {
+  const sel = $('topic-select');
+  sel.innerHTML = '<option value="">All topics</option>';
+  state.selectedTopic = '';
+  if (!state.selectedSource) return;
+  try {
+    const data = await api('categories', { source: state.selectedSource });
+    data.categories.forEach(function(cat) {
+      const opt = document.createElement('option');
+      opt.value = cat;
+      opt.textContent = cat;
+      sel.appendChild(opt);
+    });
+  } catch (err) {
+    // non-fatal
+  }
+}
+
 function selectBank(bank) {
   state.selectedBank = bank;
   document.querySelectorAll('.bank-card').forEach(function(c) {
@@ -378,6 +405,7 @@ async function startQuiz() {
   try {
     const params = { status: state.selectedBank, limit: QUIZ_SIZE };
     if (state.selectedSource) params.source = state.selectedSource;
+    if (state.selectedTopic)  params.category = state.selectedTopic;
     const data = await api('fetch', params);
     if (!data.questions.length) {
       $('home-status').textContent = 'No questions in the "' + labelForBank(state.selectedBank) + '" bank for this level.';
@@ -612,6 +640,7 @@ async function init() {
   }
   showScreen('home');
   await loadSources();
+  await loadTopics();
   await refreshTallies();
 }
 
@@ -621,6 +650,10 @@ document.querySelectorAll('.bank-card').forEach(function(c) {
 });
 $('source-select').addEventListener('change', function(e) {
   state.selectedSource = e.target.value;
+  loadTopics().then(refreshTallies);
+});
+$('topic-select').addEventListener('change', function(e) {
+  state.selectedTopic = e.target.value;
   refreshTallies();
 });
 $('start-btn').addEventListener('click',   startQuiz);
